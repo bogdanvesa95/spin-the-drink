@@ -7,6 +7,7 @@ const WHEEL_COLORS = [
   "oklch(0.70 0.25 280)",
   "oklch(0.75 0.22 120)",
   "oklch(0.70 0.22 45)",
+  "oklch(0.71 0.22 85)",
 ];
 
 function App() {
@@ -106,7 +107,7 @@ function App() {
 
   const deleteItem = (index: number) => {
     if (items.length <= 2) {
-      alert("You need at least 2 items on the wheel!");
+      alert("Coaie, macar 2 :(!");
       return;
     }
     setItems(items.filter((_, i) => i !== index));
@@ -144,12 +145,11 @@ function App() {
           disabled={isSpinning}
           className="w-full mt-6 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 py-3 rounded-lg font-bold text-lg"
         >
-          {isSpinning ? "Fikaaaaaat..." : "Distruge-ti fikatul!"}
+          {isSpinning ? "Fikaaaaaaat..." : "Distrugeee-ti fikaatul!"}
         </button>
         {winner && (
           <div className="text-center mt-4 animate-bounce">
-            <p className="text-sm text-gray-400">Winner:</p>
-            <p className="text-2xl font-bold">{winner}</p>
+            <p className="text-sm text-gray-400">Da-i pe gat!</p>
           </div>
         )}
       </div>
