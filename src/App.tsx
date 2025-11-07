@@ -144,7 +144,7 @@ function App() {
           disabled={isSpinning}
           className="w-full mt-6 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 py-3 rounded-lg font-bold text-lg"
         >
-          {isSpinning ? "Spinning..." : "SPIN THE WHEEL!"}
+          {isSpinning ? "Fikaaaaaat..." : "Distruge-ti fikatul!"}
         </button>
         {winner && (
           <div className="text-center mt-4 animate-bounce">
