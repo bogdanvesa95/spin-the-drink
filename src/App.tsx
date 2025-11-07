@@ -26,7 +26,6 @@ function App() {
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [winner, setWinner] = useState<string | null>(null);
-  const [spinCount, setSpinCount] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const drawWheel = () => {
@@ -79,7 +78,6 @@ function App() {
     if (isSpinning || items.length === 0) return;
     setIsSpinning(true);
     setWinner(null);
-    setSpinCount((prev) => prev + 1);
 
     const spins = 5 + Math.random() * 5;
     const extraDegrees = Math.random() * 360;
@@ -103,25 +101,12 @@ function App() {
         const normalizedRotation = currentRotation % 360;
         const adjustedRotation = (450 - normalizedRotation) % 360;
         const sliceAngle = 360 / items.length;
-        let winnerIndex =
+        const winnerIndex =
           Math.floor(adjustedRotation / sliceAngle) % items.length;
-        let result = items[winnerIndex];
-
-        // 🔥 Joker & Faliment rule: doar o dată la 5 spinuri
-        if (
-          (result === "🤡 Joker 🤡" || result === "💀 Faliment 💀") &&
-          spinCount % 5 !== 0
-        ) {
-          // dacă n-avem voie acum, căutăm alt item random
-          const normalItems = items.filter(
-            (i) => i !== "🤡 Joker 🤡" && i !== "💀 Faliment 💀"
-          );
-          result = normalItems[Math.floor(Math.random() * normalItems.length)];
-        }
-
-        setWinner(result);
+        setWinner(items[winnerIndex]);
       }
     };
+
     requestAnimationFrame(animate);
   };
 
@@ -169,18 +154,7 @@ function App() {
         </button>
         {winner && (
           <div className="text-center mt-4 animate-bounce">
-            <p className="text-lg font-bold">{winner}</p>
-            {winner === "🤡 Joker 🤡" && (
-              <p className="text-sm text-gray-400">Poți alege ce bei 😎</p>
-            )}
-            {winner === "💀 Faliment 💀" && (
-              <p className="text-sm text-gray-400">
-                Bei un shot de tărie sau o bere întreagă (talpă) 💀
-              </p>
-            )}
-            {winner !== "🤡 Joker 🤡" && winner !== "💀 Faliment 💀" && (
-              <p className="text-sm text-gray-400">Da-i pe gat!</p>
-            )}
+            {winner && <p className="text-sm text-gray-400">Da-i pe gat!</p>}
           </div>
         )}
       </div>
@@ -228,18 +202,15 @@ function App() {
         ))}
       </div>
 
-      {/* 🔻 Footer cu explicații */}
       <footer className="text-sm text-gray-500 mt-4 text-center max-w-md">
         <p>
-          🤡 <b>Joker</b>: îți permite să alegi ce vrei să bei.
+          🤡 <b>Joker</b>: Iti permite sa alegi ce vrei sa bei.
         </p>
         <p>
-          💀 <b>Faliment</b>: trebuie să bei un shot de tărie sau o bere
-          întreagă (talpă).
+          💀 <b>Faliment</b>: trebuie să bei un shot de tarie sau o bere
+          întreaga (talpa). Poti scapa de asta cu 15 flotari supervizate.
         </p>
-        <p className="mt-2 italic">
-          Joker și Faliment apar doar o dată la fiecare 5 rotiri.
-        </p>
+        <p className="mt-2 italic">Toate opțiunile au șanse egale 🍻</p>
       </footer>
     </div>
   );
