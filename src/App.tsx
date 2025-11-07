@@ -16,6 +16,7 @@ function App() {
     "Golden Brau",
     "Neumarkt",
     "Madri",
+    "Tuborg",
   ]);
   const [newItem, setNewItem] = useState("");
   const [isSpinning, setIsSpinning] = useState(false);
